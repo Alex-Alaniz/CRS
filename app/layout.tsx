@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -8,18 +8,23 @@ const inter = Inter({
   variable: '--font-inter'
 })
 
-const playfair = Playfair_Display({ 
+const spaceGrotesk = Space_Grotesk({ 
   subsets: ["latin"],
-  variable: '--font-playfair'
+  variable: '--font-space'
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: '--font-mono'
 })
 
 export const metadata: Metadata = {
-  title: 'Controlled Risk Services | Construction Safety Consultants',
-  description: 'CRS provides comprehensive safety solutions including safety program assessments, organizational audits, and incident investigations. Your trusted partner in construction safety and risk management.',
+  title: 'CRS | Controlled Risk Services',
+  description: 'Construction safety and risk management consultants. Protecting people. Powering projects. Expert safety governance for construction and industrial operations.',
   keywords: ['construction safety', 'risk management', 'safety consultants', 'OSHA compliance', 'safety audits', 'Houston safety'],
   authors: [{ name: 'Controlled Risk Services' }],
   openGraph: {
-    title: 'Controlled Risk Services | Construction Safety Consultants',
+    title: 'CRS | Controlled Risk Services',
     description: 'Protecting People. Powering Projects. Expert safety governance and risk management for construction and industrial projects.',
     type: 'website',
   },
@@ -28,7 +33,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#1a2744',
+  themeColor: '#0f1419',
 }
 
 export default function RootLayout({
@@ -37,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} bg-background`}>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} bg-background`}>
       <body className="font-sans antialiased min-h-screen">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}

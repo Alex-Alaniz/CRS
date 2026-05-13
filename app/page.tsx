@@ -8,147 +8,193 @@ import {
   Users, 
   ClipboardCheck, 
   HardHat, 
-  ArrowRight,
-  CheckCircle2,
+  ArrowUpRight,
   Building2,
   Factory,
-  Wrench
+  Wrench,
+  Cpu
 } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
 
 const services = [
   {
     icon: Shield,
     title: "Safety Consultant SME",
-    description: "Top subject matter experts dedicated to ensuring your project runs safely and smoothly, identifying hazards without disrupting workflow.",
+    description: "Top subject matter experts ensuring your project runs safely, identifying hazards without disrupting workflow.",
+    tags: ["OSHA", "COMPLIANCE", "AUDITS"],
   },
   {
     icon: HardHat,
     title: "Construction Manager",
-    description: "Expert construction managers to ensure your project runs smoothly and safely, tackling challenges with expertise and precision.",
+    description: "Expert managers ensuring projects run smoothly and safely, tackling challenges with precision.",
+    tags: ["PROJECT MGMT", "COORDINATION"],
   },
   {
     icon: ClipboardCheck,
     title: "Cost Manager",
-    description: "Dedicated professionals maintaining budgets and ensuring financial goals are met without compromising quality or safety.",
+    description: "Dedicated professionals maintaining budgets without compromising quality or safety.",
+    tags: ["BUDGETING", "FINANCIAL"],
   },
   {
     icon: Users,
     title: "Field Safety Professional",
-    description: "On-site safety professionals providing real-time monitoring and immediate response to safety concerns.",
+    description: "On-site professionals providing real-time monitoring and immediate response to safety concerns.",
+    tags: ["ON-SITE", "MONITORING"],
   },
 ]
 
 const stats = [
-  { value: "30+", label: "Years Experience" },
-  { value: "500+", label: "Projects Completed" },
-  { value: "98%", label: "Client Satisfaction" },
-  { value: "0", label: "Compromise on Safety" },
-]
-
-const process = [
-  {
-    step: "01",
-    title: "Consultation & Assessment",
-    description: "We begin with a detailed consultation to understand your needs, risks, and operational goals.",
-  },
-  {
-    step: "02",
-    title: "Customized Planning",
-    description: "Our experts design a tailored strategy focused on effective and practical risk solutions.",
-  },
-  {
-    step: "03",
-    title: "Implementation & Support",
-    description: "We implement your plan with precision and provide reliable, ongoing client support.",
-  },
+  { value: "30+", label: "YEARS EXPERIENCE", suffix: "" },
+  { value: "500", label: "PROJECTS COMPLETED", suffix: "+" },
+  { value: "98", label: "CLIENT SATISFACTION", suffix: "%" },
+  { value: "24/7", label: "SAFETY SUPPORT", suffix: "" },
 ]
 
 const industries = [
-  { icon: Building2, name: "Commercial Construction" },
-  { icon: Factory, name: "Industrial Facilities" },
-  { icon: Wrench, name: "Semiconductor Plants" },
-  { icon: HardHat, name: "Data Centers" },
+  { icon: Building2, name: "Commercial Construction", code: "COM" },
+  { icon: Factory, name: "Industrial Facilities", code: "IND" },
+  { icon: Cpu, name: "Semiconductor Plants", code: "SEMI" },
+  { icon: Wrench, name: "Data Centers", code: "DC" },
 ]
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 }
-}
+const updates = [
+  { date: "2026.05.10", title: "New Data Center Partnership", desc: "Expanded safety operations to major Texas data center." },
+  { date: "2026.04.22", title: "Safety Excellence Award", desc: "Recognized for outstanding safety performance in Q1." },
+  { date: "2026.03.15", title: "Team Expansion", desc: "Added 12 new field safety professionals to our roster." },
+]
 
 export default function HomePage() {
   return (
     <>
       <Header />
-      <main>
+      <main className="bg-background noise">
         {/* Hero Section */}
-        <section className="relative min-h-[90vh] flex items-center">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="/hero-construction.jpg"
-              alt="Construction site at golden hour"
-              fill
-              className="object-cover"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-primary/80 to-primary/40" />
-          </div>
+        <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
+          {/* Grid Background */}
+          <div className="absolute inset-0 grid-pattern opacity-50" />
           
-          <div className="container mx-auto px-6 relative z-10 py-20">
-            <div className="max-w-3xl">
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="text-accent font-medium mb-4 tracking-wide"
-              >
-                OPERATIONAL SAFETY GOVERNANCE
-              </motion.p>
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-primary-foreground mb-6 leading-tight"
-              >
-                Protecting People.<br />
-                <span className="text-accent">Powering Projects.</span>
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-                className="text-lg md:text-xl text-primary-foreground/90 mb-8 leading-relaxed max-w-2xl"
-              >
-                At Controlled Risk Services, we deliver comprehensive safety solutions with executive-level governance, data-driven management, and measurable outcomes for construction and industrial projects.
-              </motion.p>
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex flex-col sm:flex-row gap-4"
-              >
-                <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
-                  <Link href="/services">
-                    Our Services
-                    <ArrowRight className="ml-2 w-5 h-5" />
+          {/* Decorative elements */}
+          <div className="absolute top-40 right-10 w-px h-40 bg-gradient-to-b from-transparent via-accent/50 to-transparent hidden lg:block" />
+          <div className="absolute bottom-40 left-10 w-px h-40 bg-gradient-to-b from-transparent via-accent/50 to-transparent hidden lg:block" />
+          
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 py-20">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="text-xs font-mono text-muted-foreground mb-6 tracking-widest"
+                >
+                  OPERATIONAL SAFETY GOVERNANCE
+                </motion.p>
+                
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-foreground mb-2 leading-[1.1] tracking-tight"
+                >
+                  <span className="text-accent">CONTROLLED</span>
+                </motion.h1>
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-foreground mb-8 leading-[1.1] tracking-tight"
+                >
+                  RISK SERVICES
+                </motion.h1>
+                
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-muted-foreground text-lg mb-10 leading-relaxed max-w-lg"
+                >
+                  We deliver comprehensive safety solutions with executive-level governance, data-driven management, and measurable outcomes. From concept to completion.
+                </motion.p>
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex flex-wrap gap-4"
+                >
+                  <Link
+                    href="/services"
+                    className="group inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground text-xs font-mono tracking-wider hover:bg-accent/90 transition-colors"
+                  >
+                    VIEW SERVICES
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-                  <Link href="/contact">Request Consultation</Link>
-                </Button>
+                  <Link
+                    href="/team"
+                    className="group inline-flex items-center gap-2 px-6 py-3 border border-border text-foreground text-xs font-mono tracking-wider hover:border-accent hover:text-accent transition-colors"
+                  >
+                    MEET THE ORG
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </Link>
+                </motion.div>
+                
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  className="text-xs font-mono text-muted-foreground mt-12 tracking-wider"
+                >
+                  CRS INTERFACE / 2026
+                </motion.p>
+              </div>
+              
+              {/* Hero Image */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+                className="relative hidden lg:block"
+              >
+                <div className="aspect-[4/5] relative border border-border overflow-hidden">
+                  <Image
+                    src="/hero-construction.jpg"
+                    alt="Construction site"
+                    fill
+                    className="object-cover opacity-80"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <p className="text-xs font-mono text-muted-foreground mb-2">HOUSTON, TX / CHEYENNE, WY</p>
+                    <p className="text-sm text-foreground">Protecting People. Powering Projects.</p>
+                  </div>
+                </div>
+                {/* Corner decorations */}
+                <div className="absolute -top-2 -left-2 w-8 h-8 border-t border-l border-accent" />
+                <div className="absolute -bottom-2 -right-2 w-8 h-8 border-b border-r border-accent" />
               </motion.div>
             </div>
           </div>
         </section>
 
+        {/* Updates Ticker */}
+        <section className="border-y border-border py-4 overflow-hidden bg-card/50">
+          <div className="flex animate-marquee">
+            {[...updates, ...updates].map((update, index) => (
+              <div key={index} className="flex items-center gap-8 px-8 whitespace-nowrap">
+                <span className="text-xs font-mono text-accent">{update.date}</span>
+                <span className="text-sm text-foreground">{update.title}</span>
+                <span className="text-xs text-muted-foreground">{update.desc}</span>
+                <span className="text-muted-foreground">|</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Stats Section */}
-        <section className="py-8 bg-card relative -mt-16 z-20 mx-6 rounded-xl shadow-lg">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <section className="py-20 border-b border-border">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -156,10 +202,84 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-center"
+                  className="text-center lg:text-left"
                 >
-                  <p className="text-3xl md:text-4xl font-bold text-accent">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
+                  <p className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground">
+                    {stat.value}
+                    <span className="text-accent">{stat.suffix}</span>
+                  </p>
+                  <p className="text-xs font-mono text-muted-foreground mt-2 tracking-wider">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Services Section - Bento Grid */}
+        <section className="py-24" id="services">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-baseline gap-4 mb-16"
+            >
+              <span className="text-xs font-mono text-accent tracking-wider">01 / SERVICES</span>
+              <div className="flex-1 h-px bg-border" />
+            </motion.div>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4"
+            >
+              <span className="text-accent">COMPREHENSIVE</span> SAFETY
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="text-muted-foreground max-w-2xl mb-16"
+            >
+              We deliver customized risk management solutions tailored to your operational needs, ensuring protection, compliance, and peace of mind.
+            </motion.p>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              {services.map((service, index) => (
+                <motion.div
+                  key={service.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="group relative p-8 bg-card border border-border hover:border-accent/50 transition-all duration-300"
+                >
+                  <div className="absolute top-4 right-4 text-xs font-mono text-muted-foreground">
+                    {String(index + 1).padStart(2, "0")}
+                  </div>
+                  
+                  <div className="w-12 h-12 flex items-center justify-center border border-border group-hover:border-accent transition-colors mb-6">
+                    <service.icon className="w-6 h-6 text-accent" />
+                  </div>
+                  
+                  <h3 className="text-xl font-serif font-bold text-foreground mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-6">{service.description}</p>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {service.tags.map((tag) => (
+                      <span key={tag} className="text-[10px] font-mono px-2 py-1 bg-secondary text-muted-foreground tracking-wider">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  
+                  <Link 
+                    href="/services"
+                    className="absolute bottom-4 right-4 w-8 h-8 flex items-center justify-center border border-border group-hover:border-accent group-hover:text-accent transition-colors"
+                  >
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
                 </motion.div>
               ))}
             </div>
@@ -167,38 +287,50 @@ export default function HomePage() {
         </section>
 
         {/* About Section */}
-        <section className="py-24 bg-background">
-          <div className="container mx-auto px-6">
+        <section className="py-24 bg-card border-y border-border">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex items-baseline gap-4 mb-16"
+            >
+              <span className="text-xs font-mono text-accent tracking-wider">02 / ABOUT</span>
+              <div className="flex-1 h-px bg-border" />
+            </motion.div>
+
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <p className="text-accent font-medium mb-4 tracking-wide">WHO WE ARE</p>
-                <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-6">
-                  Built on Three Decades of Excellence
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-8 leading-tight">
+                  BUILT ON <span className="text-accent">THREE DECADES</span> OF EXCELLENCE
                 </h2>
                 <p className="text-muted-foreground mb-6 leading-relaxed">
-                  CRS Safety was founded on nearly three decades of experience in construction and the oil field. Our founder worked in some of the toughest environments—confined spaces, towers, and high-risk industrial sites—where he witnessed firsthand the devastating impact of unsafe practices.
+                  CRS Safety was founded on nearly three decades of experience in construction and the oil field. Our founder worked in some of the toughest environments—confined spaces, towers, and high-risk industrial sites.
                 </p>
                 <p className="text-muted-foreground mb-8 leading-relaxed">
                   Today, CRS Safety provides top-level management support and safety staffing for AGC air gap cloud data centers, commercial construction, semiconductors, and high-risk industries nationwide.
                 </p>
-                <ul className="space-y-4 mb-8">
-                  {["Executive-level safety governance", "Data-driven risk management", "Multi-year program support", "Regulatory compliance expertise"].map((item) => (
-                    <li key={item} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-accent shrink-0" />
+                
+                <div className="grid grid-cols-2 gap-4 mb-8">
+                  {["Executive Governance", "Data-Driven Mgmt", "Multi-Year Support", "OSHA Compliance"].map((item) => (
+                    <div key={item} className="flex items-center gap-3 text-sm">
+                      <div className="w-1.5 h-1.5 bg-accent" />
                       <span className="text-foreground">{item}</span>
-                    </li>
+                    </div>
                   ))}
-                </ul>
-                <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  <Link href="/about">
-                    Learn More About Us
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
-                </Button>
+                </div>
+                
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-2 text-accent text-sm font-mono tracking-wider hover:underline"
+                >
+                  LEARN MORE
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
               </motion.div>
               
               <motion.div
@@ -207,142 +339,37 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="aspect-[4/3] relative rounded-2xl overflow-hidden">
+                <div className="aspect-[4/3] relative border border-border overflow-hidden">
                   <Image
                     src="/about-team.jpg"
-                    alt="CRS Safety team on job site"
+                    alt="CRS Safety team"
                     fill
-                    className="object-cover"
+                    className="object-cover opacity-80"
                   />
                 </div>
-                <div className="absolute -bottom-8 -left-8 bg-accent text-accent-foreground p-6 rounded-xl shadow-lg hidden md:block">
-                  <p className="text-4xl font-bold">30+</p>
-                  <p className="text-sm">Years of Combined Experience</p>
+                <div className="absolute -bottom-4 -right-4 p-6 bg-accent text-accent-foreground">
+                  <p className="text-3xl font-serif font-bold">30+</p>
+                  <p className="text-xs font-mono tracking-wider">YEARS EXP</p>
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Services Section */}
-        <section className="py-24 bg-secondary">
-          <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center max-w-2xl mx-auto mb-16"
-            >
-              <p className="text-accent font-medium mb-4 tracking-wide">OUR SERVICES</p>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-6">
-                Comprehensive Safety Solutions
-              </h2>
-              <p className="text-muted-foreground">
-                We deliver customized risk management and security solutions tailored to your operational needs, ensuring protection, compliance, and peace of mind.
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {services.map((service, index) => (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="h-full hover:shadow-lg transition-shadow bg-card border-0">
-                    <CardContent className="p-8">
-                      <div className="w-14 h-14 rounded-lg bg-accent/10 flex items-center justify-center mb-6">
-                        <service.icon className="w-7 h-7 text-accent" />
-                      </div>
-                      <h3 className="text-xl font-semibold text-foreground mb-4">{service.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mt-12"
-            >
-              <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                <Link href="/services">
-                  View All Services
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Process Section */}
-        <section className="py-24 bg-background">
-          <div className="container mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center max-w-2xl mx-auto mb-16"
-            >
-              <p className="text-accent font-medium mb-4 tracking-wide">OUR PROCESS</p>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-6">
-                How We Work With You
-              </h2>
-              <p className="text-muted-foreground">
-                Our streamlined approach ensures you receive tailored safety solutions from initial consultation to ongoing support.
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              {process.map((item, index) => (
-                <motion.div
-                  key={item.step}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative"
-                >
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary text-primary-foreground text-2xl font-bold mb-6">
-                      {item.step}
-                    </div>
-                    <h3 className="text-xl font-semibold text-foreground mb-4">{item.title}</h3>
-                    <p className="text-muted-foreground">{item.description}</p>
-                  </div>
-                  {index < process.length - 1 && (
-                    <div className="hidden md:block absolute top-10 left-[60%] w-[80%] h-0.5 bg-border" />
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Industries Section */}
-        <section className="py-24 bg-primary text-primary-foreground">
-          <div className="container mx-auto px-6">
+        <section className="py-24">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center max-w-2xl mx-auto mb-16"
+              className="flex items-baseline gap-4 mb-16"
             >
-              <p className="text-accent font-medium mb-4 tracking-wide">INDUSTRIES WE SERVE</p>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">
-                Expertise Across Sectors
-              </h2>
-              <p className="text-primary-foreground/80">
-                From commercial construction to high-tech semiconductor facilities, we bring specialized safety expertise to every industry.
-              </p>
+              <span className="text-xs font-mono text-accent tracking-wider">03 / INDUSTRIES</span>
+              <div className="flex-1 h-px bg-border" />
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               {industries.map((industry, index) => (
                 <motion.div
                   key={industry.name}
@@ -350,41 +377,37 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-center"
+                  className="group p-6 bg-card border border-border hover:border-accent/50 transition-all"
                 >
-                  <div className="w-20 h-20 mx-auto rounded-full bg-primary-foreground/10 flex items-center justify-center mb-4">
-                    <industry.icon className="w-10 h-10 text-accent" />
+                  <div className="flex items-center justify-between mb-8">
+                    <industry.icon className="w-8 h-8 text-accent" />
+                    <span className="text-xs font-mono text-muted-foreground">{industry.code}</span>
                   </div>
-                  <p className="font-medium">{industry.name}</p>
+                  <p className="text-foreground font-medium">{industry.name}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Team Preview Section */}
-        <section className="py-24 bg-background">
-          <div className="container mx-auto px-6">
+        {/* Team Preview */}
+        <section className="py-24 bg-card border-y border-border">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center max-w-2xl mx-auto mb-16"
+              className="flex items-baseline gap-4 mb-16"
             >
-              <p className="text-accent font-medium mb-4 tracking-wide">MEET OUR TEAM</p>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-foreground mb-6">
-                Leadership You Can Trust
-              </h2>
-              <p className="text-muted-foreground">
-                Our experienced leadership team brings decades of combined expertise in construction safety and risk management.
-              </p>
+              <span className="text-xs font-mono text-accent tracking-wider">04 / TEAM</span>
+              <div className="flex-1 h-px bg-border" />
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div className="grid lg:grid-cols-3 gap-8">
               {[
-                { name: "Carlos Castro", role: "Founder & CEO", image: "/team/ceo.jpg" },
-                { name: "Maria Rodriguez", role: "Chief Operations Officer", image: "/team/coo.jpg" },
-                { name: "James Mitchell", role: "Director of Safety", image: "/team/safety-director.jpg" },
+                { name: "Carlos Castro", role: "FOUNDER & CEO", image: "/team/ceo.jpg" },
+                { name: "Maria Rodriguez", role: "CHIEF OPERATIONS OFFICER", image: "/team/coo.jpg" },
+                { name: "James Mitchell", role: "DIRECTOR OF SAFETY", image: "/team/safety-director.jpg" },
               ].map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -392,9 +415,9 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-center"
+                  className="group"
                 >
-                  <div className="aspect-square relative rounded-2xl overflow-hidden mb-6">
+                  <div className="aspect-[3/4] relative border border-border overflow-hidden mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
                     <Image
                       src={member.image}
                       alt={member.name}
@@ -402,8 +425,8 @@ export default function HomePage() {
                       className="object-cover"
                     />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground">{member.name}</h3>
-                  <p className="text-muted-foreground">{member.role}</p>
+                  <h3 className="text-lg font-serif font-bold text-foreground">{member.name}</h3>
+                  <p className="text-xs font-mono text-muted-foreground tracking-wider">{member.role}</p>
                 </motion.div>
               ))}
             </div>
@@ -412,47 +435,73 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-center mt-12"
+              className="mt-12 text-center"
             >
-              <Button asChild size="lg" variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                <Link href="/team">
-                  View Full Team & Org Chart
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-              </Button>
+              <Link
+                href="/team"
+                className="group inline-flex items-center gap-2 px-6 py-3 border border-border text-foreground text-xs font-mono tracking-wider hover:border-accent hover:text-accent transition-colors"
+              >
+                VIEW FULL TEAM & ORG CHART
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
             </motion.div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 bg-accent">
-          <div className="container mx-auto px-6">
+        <section className="py-24 relative overflow-hidden">
+          <div className="absolute inset-0 grid-pattern opacity-30" />
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="max-w-3xl mx-auto text-center"
+              className="flex items-baseline gap-4 mb-16"
             >
-              <h2 className="text-3xl md:text-4xl font-serif font-bold text-accent-foreground mb-6">
-                Ready to Elevate Your Safety Standards?
-              </h2>
-              <p className="text-accent-foreground/80 text-lg mb-8">
-                Partner with CRS for comprehensive safety solutions that protect your team and keep your projects on track.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                  <Link href="/contact">
-                    Schedule a Consultation
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="border-accent-foreground/30 text-accent-foreground hover:bg-accent-foreground/10">
-                  <a href="tel:346-436-3004">
-                    Call 346-436-3004
-                  </a>
-                </Button>
-              </div>
+              <span className="text-xs font-mono text-accent tracking-wider">05 / CONTACT</span>
+              <div className="flex-1 h-px bg-border" />
             </motion.div>
+
+            <div className="max-w-3xl">
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-8"
+              >
+                GET IN <span className="text-accent">TOUCH</span>
+              </motion.h2>
+              
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-muted-foreground text-lg mb-12 max-w-xl"
+              >
+                Partner with CRS for comprehensive safety solutions that protect your team and keep your projects on track.
+              </motion.p>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex flex-wrap gap-4"
+              >
+                <Link
+                  href="/contact"
+                  className="group inline-flex items-center gap-2 px-8 py-4 bg-accent text-accent-foreground text-xs font-mono tracking-wider hover:bg-accent/90 transition-colors"
+                >
+                  SCHEDULE CONSULTATION
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </Link>
+                <a
+                  href="tel:346-436-3004"
+                  className="group inline-flex items-center gap-2 px-8 py-4 border border-border text-foreground text-xs font-mono tracking-wider hover:border-accent hover:text-accent transition-colors"
+                >
+                  346-436-3004
+                </a>
+              </motion.div>
+            </div>
           </div>
         </section>
       </main>

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, ChevronRight, Users } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -18,42 +18,42 @@ interface OrgNode {
 const orgData: OrgNode = {
   id: "ceo",
   name: "Carlos Castro",
-  role: "Founder & CEO",
+  role: "FOUNDER & CEO",
   image: "/team/ceo.jpg",
   children: [
     {
       id: "coo",
       name: "Maria Rodriguez",
-      role: "Chief Operations Officer",
+      role: "CHIEF OPERATIONS OFFICER",
       image: "/team/coo.jpg",
       children: [
         {
           id: "ops-manager",
           name: "David Thompson",
-          role: "Operations Manager",
+          role: "OPERATIONS MANAGER",
           image: "/team/operations-manager.jpg",
-          department: "Operations",
+          department: "OPS",
           children: [
             {
               id: "field-team",
               name: "Field Teams",
-              role: "Safety Professionals",
-              department: "Field Operations",
+              role: "SAFETY PROFESSIONALS",
+              department: "FIELD",
             },
           ],
         },
         {
           id: "project-manager",
           name: "Sarah Chen",
-          role: "Project Manager",
+          role: "PROJECT MANAGER",
           image: "/team/project-manager.jpg",
-          department: "Projects",
+          department: "PROJ",
           children: [
             {
               id: "project-team",
               name: "Project Teams",
-              role: "Coordinators & Analysts",
-              department: "Projects",
+              role: "COORDINATORS",
+              department: "PROJ",
             },
           ],
         },
@@ -62,49 +62,49 @@ const orgData: OrgNode = {
     {
       id: "safety-director",
       name: "James Mitchell",
-      role: "Director of Safety",
+      role: "DIRECTOR OF SAFETY",
       image: "/team/safety-director.jpg",
       children: [
         {
           id: "field-supervisor",
           name: "Michael Roberts",
-          role: "Field Supervisor",
+          role: "FIELD SUPERVISOR",
           image: "/team/field-supervisor.jpg",
-          department: "Field Operations",
+          department: "FIELD",
           children: [
             {
               id: "safety-consultants",
               name: "Safety Consultants",
-              role: "SMEs & Specialists",
-              department: "Consulting",
+              role: "SMEs & SPECIALISTS",
+              department: "CONSULT",
             },
           ],
         },
         {
           id: "compliance",
           name: "Compliance Team",
-          role: "Auditors & Inspectors",
-          department: "Compliance",
+          role: "AUDITORS & INSPECTORS",
+          department: "COMPL",
         },
       ],
     },
     {
       id: "admin",
       name: "Administrative",
-      role: "Support Services",
-      department: "Administration",
+      role: "SUPPORT SERVICES",
+      department: "ADMIN",
       children: [
         {
           id: "hr",
           name: "Human Resources",
-          role: "HR Team",
+          role: "HR TEAM",
           department: "HR",
         },
         {
           id: "finance",
           name: "Finance",
-          role: "Accounting Team",
-          department: "Finance",
+          role: "ACCOUNTING",
+          department: "FIN",
         },
       ],
     },
@@ -118,51 +118,49 @@ function OrgCard({ node, isExpanded, onToggle, level = 0 }: {
   level?: number
 }) {
   const hasChildren = node.children && node.children.length > 0
+  const isExecutive = level === 0
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       className={cn(
-        "bg-card rounded-xl shadow-sm border border-border overflow-hidden",
-        "hover:shadow-md transition-shadow",
-        level === 0 && "ring-2 ring-accent"
+        "bg-card border overflow-hidden transition-all",
+        isExecutive ? "border-accent" : "border-border hover:border-accent/50",
+        hasChildren && "cursor-pointer"
       )}
+      onClick={hasChildren ? onToggle : undefined}
     >
-      <div 
-        className={cn(
-          "p-4 flex items-center gap-4 cursor-pointer",
-          hasChildren && "hover:bg-secondary/50"
-        )}
-        onClick={hasChildren ? onToggle : undefined}
-      >
+      <div className="p-4 flex items-center gap-4">
         {node.image ? (
-          <div className="w-14 h-14 rounded-full overflow-hidden shrink-0 relative">
+          <div className="w-12 h-12 relative border border-border overflow-hidden shrink-0">
             <Image
               src={node.image}
               alt={node.name}
               fill
-              className="object-cover"
+              className="object-cover grayscale hover:grayscale-0 transition-all"
             />
           </div>
         ) : (
-          <div className="w-14 h-14 rounded-full bg-secondary flex items-center justify-center shrink-0">
-            <Users className="w-6 h-6 text-muted-foreground" />
+          <div className="w-12 h-12 border border-border flex items-center justify-center shrink-0 bg-secondary">
+            <Users className="w-5 h-5 text-muted-foreground" />
           </div>
         )}
         <div className="flex-1 min-w-0">
-          <h4 className="font-semibold text-foreground truncate">{node.name}</h4>
-          <p className="text-sm text-accent truncate">{node.role}</p>
+          <h4 className="font-serif font-bold text-foreground truncate">{node.name}</h4>
+          <p className="text-[10px] font-mono text-accent tracking-wider truncate">{node.role}</p>
           {node.department && (
-            <p className="text-xs text-muted-foreground">{node.department}</p>
+            <span className="inline-block mt-1 text-[9px] font-mono text-muted-foreground bg-secondary px-1.5 py-0.5">
+              {node.department}
+            </span>
           )}
         </div>
         {hasChildren && (
-          <div className="shrink-0">
+          <div className="shrink-0 w-6 h-6 border border-border flex items-center justify-center">
             {isExpanded ? (
-              <ChevronDown className="w-5 h-5 text-muted-foreground" />
+              <ChevronDown className="w-4 h-4 text-accent" />
             ) : (
-              <ChevronRight className="w-5 h-5 text-muted-foreground" />
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
             )}
           </div>
         )}
@@ -184,49 +182,54 @@ function OrgBranch({ node, level = 0 }: { node: OrgNode; level?: number }) {
         level={level}
       />
       
-      {hasChildren && isExpanded && (
-        <>
-          <div className="w-0.5 h-8 bg-border" />
-          <div className="flex items-start gap-4 relative">
-            {/* Horizontal connector */}
-            {node.children!.length > 1 && (
-              <div 
-                className="absolute top-0 left-1/2 -translate-x-1/2 h-0.5 bg-border"
-                style={{ width: `calc(100% - 200px)` }}
-              />
-            )}
-            
-            <div className="flex flex-wrap justify-center gap-4">
-              {node.children!.map((child, index) => (
-                <div key={child.id} className="flex flex-col items-center">
-                  {node.children!.length > 1 && (
-                    <div className="w-0.5 h-4 bg-border" />
-                  )}
-                  <OrgBranch node={child} level={level + 1} />
-                </div>
-              ))}
+      <AnimatePresence>
+        {hasChildren && isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="flex flex-col items-center"
+          >
+            <div className="w-px h-8 bg-border" />
+            <div className="flex items-start gap-4 relative">
+              {node.children!.length > 1 && (
+                <div 
+                  className="absolute top-0 left-1/2 -translate-x-1/2 h-px bg-border"
+                  style={{ width: `calc(100% - 180px)` }}
+                />
+              )}
+              
+              <div className="flex flex-wrap justify-center gap-4">
+                {node.children!.map((child) => (
+                  <div key={child.id} className="flex flex-col items-center">
+                    {node.children!.length > 1 && (
+                      <div className="w-px h-4 bg-border" />
+                    )}
+                    <OrgBranch node={child} level={level + 1} />
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
 
-// Mobile-friendly list view
 function OrgList({ node, level = 0 }: { node: OrgNode; level?: number }) {
   const [isExpanded, setIsExpanded] = useState(level < 2)
   const hasChildren = node.children && node.children.length > 0
 
   return (
-    <div className={cn("relative", level > 0 && "ml-4 md:ml-8")}>
+    <div className={cn("relative", level > 0 && "ml-6")}>
       {level > 0 && (
-        <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-border -translate-x-4" />
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-border -translate-x-3" />
       )}
       
       <div className="relative">
         {level > 0 && (
-          <div className="absolute left-0 top-1/2 w-3 h-0.5 bg-border -translate-x-4 -translate-y-0.5" />
+          <div className="absolute left-0 top-1/2 w-2 h-px bg-border -translate-x-3 -translate-y-px" />
         )}
         <OrgCard 
           node={node} 
@@ -236,13 +239,20 @@ function OrgList({ node, level = 0 }: { node: OrgNode; level?: number }) {
         />
       </div>
       
-      {hasChildren && isExpanded && (
-        <div className="mt-4 space-y-4">
-          {node.children!.map((child) => (
-            <OrgList key={child.id} node={child} level={level + 1} />
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {hasChildren && isExpanded && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="mt-4 space-y-4"
+          >
+            {node.children!.map((child) => (
+              <OrgList key={child.id} node={child} level={level + 1} />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
@@ -263,18 +273,21 @@ export function OrganizationalChart() {
       </div>
       
       {/* Legend */}
-      <div className="mt-12 flex flex-wrap justify-center gap-6 text-sm">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-accent" />
-          <span className="text-muted-foreground">Executive Leadership</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-secondary" />
-          <span className="text-muted-foreground">Department/Team</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <ChevronRight className="w-4 h-4 text-muted-foreground" />
-          <span className="text-muted-foreground">Click to expand</span>
+      <div className="mt-16 p-6 border border-border">
+        <p className="text-xs font-mono text-accent tracking-wider mb-4">LEGEND</p>
+        <div className="flex flex-wrap gap-6 text-sm">
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 border border-accent bg-accent/20" />
+            <span className="text-xs text-muted-foreground">Executive Leadership</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="w-3 h-3 border border-border bg-secondary" />
+            <span className="text-xs text-muted-foreground">Department / Team</span>
+          </div>
+          <div className="flex items-center gap-3">
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            <span className="text-xs text-muted-foreground">Click to expand</span>
+          </div>
         </div>
       </div>
     </div>
