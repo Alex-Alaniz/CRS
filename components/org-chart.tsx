@@ -5,111 +5,7 @@ import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, ChevronRight, Users, Star, Shield } from "lucide-react"
 import { cn } from "@/lib/utils"
-
-interface OrgNode {
-  id: string
-  name: string
-  role: string
-  image?: string
-  department?: string
-  children?: OrgNode[]
-}
-
-const orgData: OrgNode = {
-  id: "ceo",
-  name: "Carlos Castro",
-  role: "FOUNDER & CEO",
-  image: "/team/ceo.jpg",
-  children: [
-    {
-      id: "coo",
-      name: "Maria Rodriguez",
-      role: "CHIEF OPERATIONS OFFICER",
-      image: "/team/coo.jpg",
-      children: [
-        {
-          id: "ops-manager",
-          name: "David Thompson",
-          role: "OPERATIONS MANAGER",
-          image: "/team/operations-manager.jpg",
-          department: "OPS",
-          children: [
-            {
-              id: "field-team",
-              name: "Field Teams",
-              role: "SAFETY PROFESSIONALS",
-              department: "FIELD",
-            },
-          ],
-        },
-        {
-          id: "project-manager",
-          name: "Sarah Chen",
-          role: "PROJECT MANAGER",
-          image: "/team/project-manager.jpg",
-          department: "PROJ",
-          children: [
-            {
-              id: "project-team",
-              name: "Project Teams",
-              role: "COORDINATORS",
-              department: "PROJ",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "safety-director",
-      name: "James Mitchell",
-      role: "DIRECTOR OF SAFETY",
-      image: "/team/safety-director.jpg",
-      children: [
-        {
-          id: "field-supervisor",
-          name: "Michael Roberts",
-          role: "FIELD SUPERVISOR",
-          image: "/team/field-supervisor.jpg",
-          department: "FIELD",
-          children: [
-            {
-              id: "safety-consultants",
-              name: "Safety Consultants",
-              role: "SMEs & SPECIALISTS",
-              department: "CONSULT",
-            },
-          ],
-        },
-        {
-          id: "compliance",
-          name: "Compliance Team",
-          role: "AUDITORS & INSPECTORS",
-          department: "COMPL",
-        },
-      ],
-    },
-    {
-      id: "admin",
-      name: "Administrative",
-      role: "SUPPORT SERVICES",
-      department: "ADMIN",
-      children: [
-        {
-          id: "hr",
-          name: "Human Resources",
-          role: "HR TEAM",
-          department: "HR",
-        },
-        {
-          id: "finance",
-          name: "Finance",
-          role: "ACCOUNTING",
-          department: "FIN",
-        },
-      ],
-    },
-  ],
-}
+import { orgData, type OrgNode } from "@/lib/team-data"
 
 function OrgCard({ node, isExpanded, onToggle, level = 0 }: { 
   node: OrgNode
@@ -157,7 +53,11 @@ function OrgCard({ node, isExpanded, onToggle, level = 0 }: {
           </div>
         ) : (
           <div className="w-14 h-14 border-2 border-[#1e3a5f] flex items-center justify-center shrink-0 bg-[#0a1628]">
-            <Users className="w-6 h-6 text-[#8ba3c7]" />
+            {node.initials ? (
+              <span className="text-sm font-bold text-metallic">{node.initials}</span>
+            ) : (
+              <Users className="w-6 h-6 text-[#8ba3c7]" />
+            )}
           </div>
         )}
         <div className="flex-1 min-w-0">
@@ -302,7 +202,7 @@ export function OrganizationalChart() {
           </div>
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 border-2 border-[#c41e3a] bg-[#c41e3a]/10" />
-            <span className="text-xs text-[#8ba3c7]">C-Level Leadership</span>
+            <span className="text-xs text-[#8ba3c7]">Profiled Personnel</span>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 border-2 border-[#1e3a5f] bg-[#0a1628]" />

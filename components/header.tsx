@@ -1,10 +1,11 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Shield, Star } from "lucide-react"
+import { Menu, X, Star } from "lucide-react"
 
 const navigation = [
   { name: "HOME", href: "/" },
@@ -42,12 +43,13 @@ export function Header() {
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <Shield className="w-10 h-10 text-[#1e3a5f] fill-[#0f2140]" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-xs font-bold text-[#d4a955]">US</span>
-              </div>
-            </div>
+            <Image
+              src="/crs-mark.jpg"
+              alt="CRS logo"
+              width={52}
+              height={52}
+              className="h-12 w-12 rounded-sm bg-white object-contain p-1"
+            />
             <div className="flex flex-col">
               <span className="text-2xl lg:text-3xl font-bold tracking-wider text-metallic">
                 CRS

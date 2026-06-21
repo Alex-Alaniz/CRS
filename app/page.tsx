@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { 
+import {
   Shield, 
   Users, 
   ClipboardCheck, 
@@ -19,6 +19,7 @@ import {
 } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { homepageTeam, type TeamProfile } from "@/lib/team-data"
 
 const services = [
   {
@@ -67,6 +68,27 @@ const values = [
   { title: "EXCELLENCE", description: "Delivering superior results that exceed industry standards and expectations." },
 ]
 
+function ProfileVisual({ member }: { member: TeamProfile }) {
+  if (member.image) {
+    return (
+      <Image
+        src={member.image}
+        alt={member.imageAlt ?? member.name}
+        fill
+        className="object-cover"
+      />
+    )
+  }
+
+  return (
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#081020]">
+      <div className="text-5xl font-bold text-metallic">{member.initials}</div>
+      <div className="mt-4 h-px w-16 bg-[#d4a955]" />
+      <div className="mt-4 text-[10px] font-semibold tracking-[0.3em] text-[#8ba3c7]">CRS</div>
+    </div>
+  )
+}
+
 export default function HomePage() {
   return (
     <>
@@ -83,6 +105,7 @@ export default function HomePage() {
               fill
               className="object-cover object-left"
               aria-hidden="true"
+              loading="eager"
             />
           </div>
           
@@ -491,16 +514,12 @@ export default function HomePage() {
               className="flex items-center gap-4 mb-16"
             >
               <Users className="w-6 h-6 text-[#d4a955]" />
-              <span className="text-xs font-semibold text-[#d4a955] tracking-widest">OUR LEADERSHIP</span>
+              <span className="text-xs font-semibold text-[#d4a955] tracking-widest">OUR PEOPLE</span>
               <div className="flex-1 h-px bg-[#1e3a5f]" />
             </motion.div>
 
             <div className="grid lg:grid-cols-3 gap-8">
-              {[
-                { name: "Carlos Castro", role: "FOUNDER & CEO", image: "/team/ceo.jpg" },
-                { name: "Maria Rodriguez", role: "CHIEF OPERATIONS OFFICER", image: "/team/coo.jpg" },
-                { name: "James Mitchell", role: "DIRECTOR OF SAFETY", image: "/team/safety-director.jpg" },
-              ].map((member, index) => (
+              {homepageTeam.map((member, index) => (
                 <motion.div
                   key={member.name}
                   initial={{ opacity: 0, y: 20 }}
@@ -510,12 +529,7 @@ export default function HomePage() {
                   className="group"
                 >
                   <div className="aspect-[3/4] relative border-2 border-[#1e3a5f] overflow-hidden mb-4 group-hover:border-[#c41e3a] transition-colors">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                    />
+                    <ProfileVisual member={member} />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-transparent" />
                     
                     {/* USA badge */}

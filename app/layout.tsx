@@ -28,6 +28,9 @@ export const metadata: Metadata = {
     description: 'Integrity. Protection. Excellence. Expert safety governance and risk management for construction and industrial projects.',
     type: 'website',
   },
+  icons: {
+    icon: '/crs-mark.jpg',
+  },
 }
 
 export const viewport: Viewport = {

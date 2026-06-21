@@ -3,58 +3,34 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowUpRight, Linkedin, Mail, Star, Shield, Users, Flag } from "lucide-react"
+import { ArrowUpRight, Mail, Star, Shield, Users, Flag } from "lucide-react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { OrganizationalChart } from "@/components/org-chart"
+import { leadership, teamMembers, type TeamProfile } from "@/lib/team-data"
 
-const leadership = [
-  {
-    name: "Carlos Castro",
-    role: "FOUNDER & CEO",
-    image: "/team/ceo.jpg",
-    bio: "With nearly three decades of experience in construction and oil field operations, Carlos founded CRS with a mission to prioritize safety professionals and deliver exceptional results.",
-    linkedin: "https://linkedin.com",
-    email: "carlos.castro@controlledriskservices.com",
-  },
-  {
-    name: "Maria Rodriguez",
-    role: "CHIEF OPERATIONS OFFICER",
-    image: "/team/coo.jpg",
-    bio: "Maria oversees all operational aspects of CRS, ensuring that every project receives the attention and expertise it deserves. Her leadership drives our commitment to excellence.",
-    linkedin: "https://linkedin.com",
-    email: "maria.rodriguez@controlledriskservices.com",
-  },
-  {
-    name: "James Mitchell",
-    role: "DIRECTOR OF SAFETY",
-    image: "/team/safety-director.jpg",
-    bio: "James brings 20+ years of field experience to his role, having worked on some of the most demanding construction sites in the country. He leads our safety consulting practice.",
-    linkedin: "https://linkedin.com",
-    email: "james.mitchell@controlledriskservices.com",
-  },
-]
+function ProfileVisual({ member, size = "large" }: { member: TeamProfile; size?: "large" | "small" }) {
+  if (member.image) {
+    return (
+      <Image
+        src={member.image}
+        alt={member.imageAlt ?? member.name}
+        fill
+        className="object-cover"
+      />
+    )
+  }
 
-const teamMembers = [
-  {
-    name: "David Thompson",
-    role: "OPERATIONS MANAGER",
-    image: "/team/operations-manager.jpg",
-    department: "OPS",
-  },
-  {
-    name: "Sarah Chen",
-    role: "PROJECT MANAGER",
-    image: "/team/project-manager.jpg",
-    department: "PROJ",
-  },
-  {
-    name: "Michael Roberts",
-    role: "FIELD SUPERVISOR",
-    image: "/team/field-supervisor.jpg",
-    department: "FIELD",
-  },
-]
+  return (
+    <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#081020]">
+      <div className={size === "large" ? "text-5xl font-bold text-metallic" : "text-xl font-bold text-metallic"}>
+        {member.initials}
+      </div>
+      <div className="mt-3 h-px w-12 bg-[#d4a955]" />
+      <div className="mt-3 text-[9px] font-semibold tracking-[0.25em] text-[#8ba3c7]">CRS</div>
+    </div>
+  )
+}
 
 export default function TeamPage() {
   return (
@@ -126,12 +102,7 @@ export default function TeamPage() {
                 >
                   <div className="relative border-2 border-[#1e3a5f] overflow-hidden mb-6 group-hover:border-[#c41e3a] transition-colors">
                     <div className="aspect-[3/4] relative">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                      />
+                      <ProfileVisual member={member} />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-transparent to-transparent" />
                     </div>
                     
@@ -142,7 +113,7 @@ export default function TeamPage() {
                     
                     {/* Rank stars */}
                     <div className="absolute top-4 left-4 flex gap-1">
-                      {[...Array(3 - index)].map((_, i) => (
+                      {[...Array(Math.max(1, 3 - index))].map((_, i) => (
                         <Star key={i} className="w-3 h-3 fill-[#d4a955] text-[#d4a955]" />
                       ))}
                     </div>
@@ -153,22 +124,15 @@ export default function TeamPage() {
                   <p className="text-sm text-[#8ba3c7] leading-relaxed mb-6">{member.bio}</p>
                   
                   <div className="flex gap-3">
-                    <a
-                      href={member.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-10 h-10 border border-[#1e3a5f] flex items-center justify-center text-[#8ba3c7] hover:border-[#3b82f6] hover:text-[#3b82f6] hover:bg-[#0f2140] transition-all"
-                      aria-label={`${member.name} LinkedIn`}
-                    >
-                      <Linkedin className="w-4 h-4" />
-                    </a>
-                    <a
-                      href={`mailto:${member.email}`}
-                      className="w-10 h-10 border border-[#1e3a5f] flex items-center justify-center text-[#8ba3c7] hover:border-[#c41e3a] hover:text-[#c41e3a] hover:bg-[#0f2140] transition-all"
-                      aria-label={`Email ${member.name}`}
-                    >
-                      <Mail className="w-4 h-4" />
-                    </a>
+                    {member.email && (
+                      <a
+                        href={`mailto:${member.email}`}
+                        className="w-10 h-10 border border-[#1e3a5f] flex items-center justify-center text-[#8ba3c7] hover:border-[#c41e3a] hover:text-[#c41e3a] hover:bg-[#0f2140] transition-all"
+                        aria-label={`Email ${member.name}`}
+                      >
+                        <Mail className="w-4 h-4" />
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               ))}
@@ -190,7 +154,7 @@ export default function TeamPage() {
               <div className="flex-1 h-px bg-[#1e3a5f]" />
             </motion.div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-8">
               {teamMembers.map((member, index) => (
                 <motion.div
                   key={member.name}
@@ -202,17 +166,16 @@ export default function TeamPage() {
                 >
                   <div className="flex items-start justify-between mb-6">
                     <div className="w-20 h-20 relative border-2 border-[#1e3a5f] overflow-hidden group-hover:border-[#c41e3a] transition-colors">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover"
-                      />
+                      <ProfileVisual member={member} size="small" />
                     </div>
                     <span className="text-xs font-bold text-[#d4a955] tracking-wider px-2 py-1 border border-[#d4a955]/30">{member.department}</span>
                   </div>
                   <h3 className="text-lg font-bold text-[#f0f4f8] mb-1">{member.name}</h3>
-                  <p className="text-xs text-[#c41e3a] tracking-wider font-semibold">{member.role}</p>
+                  <p className="text-xs text-[#c41e3a] tracking-wider font-semibold mb-4">{member.role}</p>
+                  <p className="text-sm text-[#8ba3c7] leading-relaxed mb-5">{member.bio}</p>
+                  <p className="text-[10px] text-[#d4a955] tracking-wider font-semibold border-t border-[#1e3a5f] pt-4">
+                    {member.credential}
+                  </p>
                 </motion.div>
               ))}
             </div>

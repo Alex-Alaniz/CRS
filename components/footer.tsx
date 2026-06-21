@@ -1,5 +1,6 @@
+import Image from "next/image"
 import Link from "next/link"
-import { Phone, Mail, MapPin, Linkedin, ArrowUpRight, Star, Shield } from "lucide-react"
+import { Phone, Mail, MapPin, ArrowUpRight, Star } from "lucide-react"
 
 const footerLinks = {
   navigation: [
@@ -29,7 +30,13 @@ export function Footer() {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-flex items-center gap-3 mb-6">
-              <Shield className="w-8 h-8 text-[#1e3a5f] fill-[#0f2140]" />
+              <Image
+                src="/crs-mark.jpg"
+                alt="CRS logo"
+                width={52}
+                height={52}
+                className="h-12 w-12 rounded-sm bg-white object-contain p-1"
+              />
               <div>
                 <span className="text-2xl font-bold text-metallic tracking-wider">CRS</span>
                 <p className="text-[8px] text-[#d4a955] tracking-[0.2em]">CONTROLLED RISK SERVICES</p>
@@ -41,15 +48,6 @@ export function Footer() {
             <p className="text-xs text-[#d4a955] font-semibold tracking-wider mb-6">
               INTEGRITY. PROTECTION. EXCELLENCE.
             </p>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-xs text-[#8ba3c7] hover:text-[#3b82f6] transition-colors tracking-wider"
-            >
-              <Linkedin className="w-4 h-4" />
-              LINKEDIN
-            </a>
           </div>
 
           {/* Navigation */}
