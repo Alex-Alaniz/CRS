@@ -18,18 +18,57 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono'
 })
 
+const siteUrl = new URL('https://controlled-risk-services.vercel.app')
+const siteTitle = 'CRS | Controlled Risk Services LLC'
+const siteDescription =
+  'Construction safety, risk governance, and project controls support for industrial, infrastructure, and mission-critical work.'
+const socialImageAlt = 'Controlled Risk Services LLC social preview'
+
 export const metadata: Metadata = {
-  title: 'CRS | Controlled Risk Services LLC',
-  description: 'Integrity. Protection. Excellence. Construction safety and risk management consultants serving America.',
-  keywords: ['construction safety', 'risk management', 'safety consultants', 'OSHA compliance', 'safety audits', 'Houston safety', 'American safety company'],
+  metadataBase: siteUrl,
+  applicationName: 'Controlled Risk Services LLC',
+  title: {
+    default: siteTitle,
+    template: '%s | Controlled Risk Services LLC',
+  },
+  description: siteDescription,
+  keywords: ['construction safety', 'risk management', 'safety consultants', 'OSHA compliance', 'safety audits', 'Houston safety', 'project controls'],
   authors: [{ name: 'Controlled Risk Services LLC' }],
+  creator: 'Controlled Risk Services LLC',
+  publisher: 'Controlled Risk Services LLC',
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
-    title: 'CRS | Controlled Risk Services LLC',
-    description: 'Integrity. Protection. Excellence. Expert safety governance and risk management for construction and industrial projects.',
+    title: siteTitle,
+    description: siteDescription,
+    url: '/',
+    siteName: 'Controlled Risk Services LLC',
+    images: [
+      {
+        url: '/opengraph-image',
+        width: 1200,
+        height: 630,
+        alt: socialImageAlt,
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: '/opengraph-image',
+        alt: socialImageAlt,
+      },
+    ],
   },
   icons: {
     icon: '/crs-mark.jpg',
+    apple: '/apple-icon.png',
   },
 }
 
