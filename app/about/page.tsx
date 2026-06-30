@@ -18,12 +18,12 @@ const values = [
   {
     icon: Eye,
     title: "Transparency",
-    description: "We believe in open communication and honest assessments. You&apos;ll always know where you stand with CRS.",
+    description: "We believe in open communication and honest assessments. You'll always know where you stand with CRS.",
   },
   {
     icon: Heart,
     title: "People-Centered",
-    description: "We take care of our safety professionals, and they take care of your project. It&apos;s that simple.",
+    description: "We take care of our safety professionals, and they take care of your project. It's that simple.",
   },
 ]
 

@@ -612,10 +612,10 @@ export default function HomePage() {
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
               <Link
-                href="tel:+18003334455"
+                href="tel:+13464363004"
                 className="group inline-flex items-center gap-3 px-8 py-4 border-2 border-[#1e3a5f] text-[#f0f4f8] text-sm font-semibold tracking-wider hover:border-[#3b82f6] hover:bg-[#0f2140] transition-all"
               >
-                CALL 1-800-333-4455
+                CALL 346-436-3004
               </Link>
             </motion.div>
           </div>
