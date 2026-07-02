@@ -62,11 +62,11 @@ export const teamMembers: TeamProfile[] = [
   },
   {
     name: "Marco Arita",
-    role: "SAFETY PROFESSIONAL",
+    role: "USACE REGIONAL SAFETY MANAGER",
     initials: "MA",
-    bio: "Marco Arita supports CRS safety coverage through field-ready planning, jobsite coordination, and compliance-minded support for construction and industrial environments.",
+    bio: "Marco Arita supports CRS safety coverage as a USACE-focused regional safety manager with field-ready planning, jobsite coordination, and compliance-minded support for construction and industrial environments.",
     department: "SAFE",
-    credential: "Safety project support",
+    credential: "USACE safety management",
   },
   {
     name: "Maria D. Moreno",
@@ -93,20 +93,12 @@ export const teamMembers: TeamProfile[] = [
     credential: "Field safety coverage",
   },
   {
-    name: "Lauren Parson",
-    role: "PROJECT SAFETY PROFESSIONAL",
-    initials: "LP",
-    bio: "Lauren Parson supports CRS project safety delivery through site-level communication, safety documentation, and coordination between project leadership and field teams.",
-    department: "PROJ",
-    credential: "Project safety delivery",
-  },
-  {
     name: "Roberto Alonzo",
-    role: "CONSTRUCTION SAFETY CONSULTANT",
+    role: "FIELD SAFETY DIRECTOR",
     initials: "RA",
-    bio: "Roberto C. Alonzo supports construction safety consulting, site safety coordination, and field auditing across aviation, refinery, oil and gas, semiconductor, airport expansion, and industrial operations. His experience includes OSHA and USACE EM 385-1-1 compliance, contractor safety documentation, incident investigation, audits, confined space, excavation, fall protection, MEWP oversight, and bilingual safety orientations.",
+    bio: "Roberto C. Alonzo serves CRS as a field safety director with years of FAA safety experience and more than a decade across oil and gas, piping construction, scaffold and fall protection, asbestos, refinery, airport expansion, and industrial operations. His experience includes OSHA and USACE EM 385-1-1 compliance, contractor safety documentation, incident investigation, audits, confined space, excavation, MEWP oversight, and bilingual safety orientations.",
     department: "AVI",
-    credential: "OSHA 30, EM 385-1-1, English/Spanish",
+    credential: "FAA safety, OSHA 30, EM 385-1-1, English/Spanish",
   },
   {
     name: "Eoin Sexton",
@@ -144,7 +136,11 @@ export const teamMembers: TeamProfile[] = [
   },
 ]
 
-export const homepageTeam = [leadership[0], teamMembers[1], teamMembers[9]]
+export const homepageTeam = [
+  leadership[0],
+  teamMembers.find((member) => member.name === "David Armstrong"),
+  teamMembers.find((member) => member.name === "Michael Aswell Sr."),
+].filter((member): member is TeamProfile => Boolean(member))
 
 export const orgData: OrgNode = {
   id: "founder",
@@ -164,13 +160,6 @@ export const orgData: OrgNode = {
           role: "SITE COORDINATION",
           department: "PROJ",
           children: [
-            {
-              id: "lauren-parson",
-              name: "Lauren Parson",
-              role: "PROJECT SAFETY PROFESSIONAL",
-              initials: "LP",
-              department: "PROJ",
-            },
             {
               id: "maria-moreno",
               name: "Maria D. Moreno",
@@ -224,7 +213,7 @@ export const orgData: OrgNode = {
             {
               id: "marco-arita",
               name: "Marco Arita",
-              role: "SAFETY PROFESSIONAL",
+              role: "USACE REGIONAL SAFETY MANAGER",
               initials: "MA",
               department: "SAFE",
             },
@@ -248,7 +237,7 @@ export const orgData: OrgNode = {
         {
           id: "roberto-alonzo",
           name: "Roberto Alonzo",
-          role: "CONSTRUCTION SAFETY CONSULTANT",
+          role: "FIELD SAFETY DIRECTOR",
           initials: "RA",
           department: "AVI",
         },
